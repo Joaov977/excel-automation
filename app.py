@@ -101,6 +101,12 @@ aba[f"D{linha}"].alignment = Alignment(horizontal="center")
 aba[f"C{linha}"].border = borda
 aba[f"D{linha}"].border = borda
 
+aba.freeze_panes = "A2"
+
+aba.auto_filter.ref = f"A1:D{linha-1}"
+
+aba.sheet_view.showGridLines = False
+
 planilha.save("vendas.xlsx")
 
 print("Planilha criada com sucesso!")
