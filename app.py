@@ -1,11 +1,14 @@
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
+from datetime import datetime
 
 planilha = Workbook()
 
 aba = planilha.active
 
 aba.title = "Relatório de Vendas"
+
+aba["A7"] = f"Relatório gerado em: {datetime.now().strftime('%d/%m/%Y %H:%M')}"
 
 cabecalhos = ["Produto", "Preço", "Quantidade", "Total"]
 
@@ -106,6 +109,8 @@ aba.freeze_panes = "A2"
 aba.auto_filter.ref = f"A1:D{linha-1}"
 
 aba.sheet_view.showGridLines = False
+
+aba.sheet_view.zoomScale = 120
 
 planilha.save("vendas.xlsx")
 
