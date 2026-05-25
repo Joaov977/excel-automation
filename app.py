@@ -2,6 +2,7 @@ from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from datetime import datetime
 from openpyxl.chart import BarChart, Reference
+from openpyxl.chart import PieChart
 
 planilha = Workbook()
 
@@ -144,6 +145,29 @@ grafico.add_data(dados,titles_from_data=True)
 grafico.set_categories(categorias)
 
 aba.add_chart(grafico,"F2")
+
+grafico_pizza = PieChart()
+
+grafico_pizza.title = "Participação nas Vendas"
+
+dados_pizza = Reference (
+    aba,
+    min_col = 4,
+    min_row = 2,
+    max_row=linha-1
+)
+
+categorias_pizza = Reference(
+    aba,
+    min_col=1,
+    min_row=2,
+    max_row=linha-1
+)
+
+grafico_pizza.add_data(dados_pizza)
+grafico_pizza.set_categories(categorias_pizza)
+
+aba.add_chart(grafico_pizza,"F20")
 
 planilha.save("vendas.xlsx")
 
