@@ -1,6 +1,7 @@
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from datetime import datetime
+from openpyxl.chart import BarChart, Reference
 
 planilha = Workbook()
 
@@ -65,6 +66,13 @@ for produto in produtos:
     aba[f"C{linha}"] = quantidade
     aba[f"D{linha}"] = total
 
+    if total >= 1000:
+        aba [f"D{linha}"].fill = PatternFill(
+            start_color="C6EFCE",
+            end_color="C6EFCE",
+            fill_type="solid"
+        )
+
     aba[f"B{linha}"].number_format = 'R$ #,##0.00'
     aba[f"D{linha}"].number_format = 'R$ #,##0.00'
 
@@ -111,6 +119,31 @@ aba.auto_filter.ref = f"A1:D{linha-1}"
 aba.sheet_view.showGridLines = False
 
 aba.sheet_view.zoomScale = 120
+
+grafico = BarChart()
+
+grafico.title = "Vendas por Produto"
+grafico.y_axis.title = "Valor Total"
+grafico.x_axis.title = "Produtos"
+
+dados = Reference(
+    aba,
+    min_col=4,
+    min_row=1,
+    max_row=linha-1
+)
+
+categorias = Reference(
+    aba,
+    min_col=1,
+    min_row=2,
+    max_row=linha-1
+)
+
+grafico.add_data(dados,titles_from_data=True)
+grafico.set_categories(categorias)
+
+aba.add_chart(grafico,"F2")
 
 planilha.save("vendas.xlsx")
 
