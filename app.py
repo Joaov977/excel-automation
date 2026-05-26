@@ -46,6 +46,8 @@ produtos = [
     ["Notebook", 3500, 1]
 ]
 
+produtos.sort(key=lambda produto: produto[1] * produto[2], reverse=True)
+
 borda = Border(
     left=Side(style="thin"),
     right=Side(style="thin"),
