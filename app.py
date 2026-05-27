@@ -70,7 +70,7 @@ for produto in produtos:
     aba[f"D{linha}"] = total
 
     if total >= 1000:
-        aba [f"D{linha}"].fill = PatternFill(
+        aba[f"D{linha}"].fill = PatternFill(
             start_color="C6EFCE",
             end_color="C6EFCE",
             fill_type="solid"
@@ -87,12 +87,17 @@ for produto in produtos:
 
 aba[f"C{linha}"] = "Total Geral"
 
-aba[f"C{linha}"].font = Font(bold=True)
-aba[f"D{linha}"].font = Font(bold=True)
+aba[f"C{linha}"].font = Font(
+    bold=True,
+    color="FFFFFF"
+)
 
+aba[f"D{linha}"].font = Font(
+    bold=True,
+    color="FFFFFF"
+)
 
 aba[f"D{linha}"] = f"=SUM(D2:D{linha-1})"
-
 
 aba[f"D{linha}"].number_format = 'R$ #,##0.00'
 
@@ -107,7 +112,6 @@ aba[f"D{linha}"].fill = PatternFill(
     end_color="D9EAD3",
     fill_type="solid"
 )
-
 
 aba[f"C{linha}"].alignment = Alignment(horizontal="center")
 aba[f"D{linha}"].alignment = Alignment(horizontal="center")
@@ -132,7 +136,7 @@ grafico.x_axis.title = "Produtos"
 dados = Reference(
     aba,
     min_col=4,
-    min_row=1,
+    min_row=2,
     max_row=linha-1
 )
 
@@ -143,19 +147,19 @@ categorias = Reference(
     max_row=linha-1
 )
 
-grafico.add_data(dados,titles_from_data=True)
+grafico.add_data(dados, titles_from_data=False)
 grafico.set_categories(categorias)
 
-aba.add_chart(grafico,"F2")
+aba.add_chart(grafico, "F2")
 
 grafico_pizza = PieChart()
 
 grafico_pizza.title = "Participação nas Vendas"
 
-dados_pizza = Reference (
+dados_pizza = Reference(
     aba,
-    min_col = 4,
-    min_row = 2,
+    min_col=4,
+    min_row=2,
     max_row=linha-1
 )
 
@@ -169,7 +173,15 @@ categorias_pizza = Reference(
 grafico_pizza.add_data(dados_pizza)
 grafico_pizza.set_categories(categorias_pizza)
 
-aba.add_chart(grafico_pizza,"F20")
+aba.add_chart(grafico_pizza, "F20")
+
+resumo = planilha.create_sheet("Resumo")
+
+resumo["A1"] = "RESUMO EXECUTIVO"
+resumo["A1"].font = Font(bold=True, size=16)
+
+resumo["A3"] = "Quantidade de Produtos"
+resumo["B3"] = len(produtos)
 
 planilha.save("vendas.xlsx")
 
