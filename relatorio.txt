@@ -1,0 +1,8 @@
+RELATÓRIO DE VENDAS
+
+Produto: Notebook | Quantidade: 1 | Total: R$3500
+Produto: Monitor | Quantidade: 3 | Total: R$2700
+Produto: Mouse | Quantidade: 2 | Total: R$200
+Produto: Teclado | Quantidade: 1 | Total: R$150
+
+Faturamento Total: R$6550

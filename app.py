@@ -190,6 +190,27 @@ resumo["A1"].font = Font(bold=True, size=16)
 resumo["A3"] = "Quantidade de Produtos"
 resumo["B3"] = len(produtos)
 
+with open("relatorio.txt", "w", encoding="utf-8") as arquivo:
+
+    arquivo.write("RELATÓRIO DE VENDAS\n\n")
+
+    faturamento_total = 0
+
+    for produto in produtos:
+        
+        nome = produto[0]
+        preco = produto[1]
+        quantidade = produto[2]
+
+        total = preco * quantidade
+
+        faturamento_total += total
+
+        arquivo.write(
+            f"Produto: {nome} | Quantidade: {quantidade} | Total: R${total}\n"
+        )
+
+    arquivo.write(f"\nFaturamento Total: R${faturamento_total}")
 planilha.save("vendas.xlsx")
 
 print("Planilha criada com sucesso!")
