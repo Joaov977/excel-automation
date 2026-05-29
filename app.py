@@ -69,12 +69,19 @@ for produto in produtos:
     aba[f"C{linha}"] = quantidade
     aba[f"D{linha}"] = total
 
-    if total >= 1000:
+    if total >= 3000:
         aba[f"D{linha}"].fill = PatternFill(
-            start_color="C6EFCE",
-            end_color="C6EFCE",
-            fill_type="solid"
-        )
+        start_color="F4CCCC",
+        end_color="F4CCCC",
+        fill_type="solid"
+    )
+
+    elif total >= 1000:
+        aba[f"D{linha}"].fill = PatternFill(
+        start_color="FFF2CC",
+        end_color="FFF2CC",
+        fill_type="solid"
+    )
 
     aba[f"B{linha}"].number_format = 'R$ #,##0.00'
     aba[f"D{linha}"].number_format = 'R$ #,##0.00'
