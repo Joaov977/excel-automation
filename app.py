@@ -3,6 +3,7 @@ from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from datetime import datetime
 from openpyxl.chart import BarChart, Reference
 from openpyxl.chart import PieChart
+import csv
 
 planilha = Workbook()
 
@@ -181,6 +182,24 @@ grafico_pizza.add_data(dados_pizza)
 grafico_pizza.set_categories(categorias_pizza)
 
 aba.add_chart(grafico_pizza, "F20")
+
+with open("vendas.csv", "w", newline="", encoding="utf-8") as arquivo:
+
+    escritor = csv.writer(arquivo)
+
+    escritor.writerow(["Produto", "Preço", "Quantidade", "Total"])
+
+    for produto in produtos:
+
+        nome = produto[0]
+        preco = produto[1]
+        quantidade = produto[2]
+
+        total = preco * quantidade
+
+        escritor.writerow(
+            [nome, preco, quantidade, total]
+        )
 
 resumo = planilha.create_sheet("Resumo")
 
