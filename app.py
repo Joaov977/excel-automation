@@ -209,6 +209,34 @@ resumo["A1"].font = Font(bold=True, size=16)
 resumo["A3"] = "Quantidade de Produtos"
 resumo["B3"] = len(produtos)
 
+faturamento_total = sum (
+    produto[1] * produto[2]
+    for produto in produtos
+)
+
+resumo["A4"] = "Faturamento Total"
+resumo["B4"] = faturamento_total
+resumo["B4"].number_format = 'R$ #,##0.00'
+
+produto_top = max(
+    produtos,
+    key=lambda produto: produto[1] * produto[2]
+)
+
+resumo["A5"] = "Produto Destaque"
+resumo["B5"] = produto_top[0]
+
+quantidade_total = sum(
+    produto[2]
+    for produto in produtos
+)
+
+resumo["A6"] = "Quantidade Vendida"
+resumo["B6"] = quantidade_total
+
+for celula in ["A3", "A4", "A5", "A6"]:
+    resumo[celula].font = Font(bold=True)
+
 with open("relatorio.txt", "w", encoding="utf-8") as arquivo:
 
     arquivo.write("RELATÓRIO DE VENDAS\n\n")
