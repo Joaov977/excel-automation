@@ -1,8 +1,16 @@
 RELATÓRIO DE VENDAS
 
-Produto: Notebook | Quantidade: 1 | Total: R$3500
-Produto: Monitor | Quantidade: 3 | Total: R$2700
-Produto: Mouse | Quantidade: 2 | Total: R$200
-Produto: Teclado | Quantidade: 1 | Total: R$150
+Produto: Notebook Lenovo | Quantidade: 4 | Total: R$15200
+Produto: Notebook Dell | Quantidade: 3 | Total: R$12600
+Produto: SSD 1TB | Quantidade: 18 | Total: R$8100
+Produto: Memória RAM 16GB | Quantidade: 25 | Total: R$8000
+Produto: Monitor 24 | Quantidade: 8 | Total: R$7200
+Produto: Monitor 27 | Quantidade: 5 | Total: R$7000
+Produto: Cadeira Gamer | Quantidade: 6 | Total: R$5700
+Produto: Placa de Vídeo RTX 4060 | Quantidade: 2 | Total: R$5000
+Produto: Webcam Full HD | Quantidade: 20 | Total: R$3600
+Produto: Teclado Mecânico | Quantidade: 10 | Total: R$3500
+Produto: Headset Gamer | Quantidade: 12 | Total: R$3360
+Produto: Mouse Gamer | Quantidade: 15 | Total: R$1800
 
-Faturamento Total: R$6550
+Faturamento Total: R$81060

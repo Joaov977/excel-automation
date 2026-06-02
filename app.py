@@ -11,8 +11,7 @@ aba = planilha.active
 
 aba.title = "Relatório de Vendas"
 
-aba["A7"] = f"Relatório gerado em: {datetime.now().strftime('%d/%m/%Y %H:%M')}"
-
+aba["A18"] = f"Relatório gerado em: {datetime.now().strftime('%d/%m/%Y %H:%M')}"
 cabecalhos = ["Produto", "Preço", "Quantidade", "Total"]
 
 for coluna, titulo in enumerate(cabecalhos, start=1):
@@ -35,16 +34,24 @@ for coluna, titulo in enumerate(cabecalhos, start=1):
         horizontal="center"
     )
 
-aba.column_dimensions["A"].width = 25
+aba.column_dimensions["A"].width = 35
 aba.column_dimensions["B"].width = 15
 aba.column_dimensions["C"].width = 15
 aba.column_dimensions["D"].width = 15
 
 produtos = [
-    ["Mouse", 100, 2],
-    ["Teclado", 150, 1],
-    ["Monitor", 900, 3],
-    ["Notebook", 3500, 1]
+    ["Mouse Gamer", 120, 15],
+    ["Teclado Mecânico", 350, 10],
+    ["Monitor 24", 900, 8],
+    ["Monitor 27", 1400, 5],
+    ["Notebook Dell", 4200, 3],
+    ["Notebook Lenovo", 3800, 4],
+    ["Headset Gamer", 280, 12],
+    ["Webcam Full HD", 180, 20],
+    ["SSD 1TB", 450, 18],
+    ["Memória RAM 16GB", 320, 25],
+    ["Placa de Vídeo RTX 4060", 2500, 2],
+    ["Cadeira Gamer", 950, 6]
 ]
 
 produtos.sort(key=lambda produto: produto[1] * produto[2], reverse=True)
