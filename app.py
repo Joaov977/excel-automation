@@ -12,8 +12,7 @@ aba = planilha.active
 aba.title = "Relatório de Vendas"
 
 aba["A18"] = f"Relatório gerado em: {datetime.now().strftime('%d/%m/%Y %H:%M')}"
-cabecalhos = ["Produto", "Preço", "Quantidade", "Total"]
-
+cabecalhos = ["Produto", "Preço", "Quantidade", "Status", "Total"]
 for coluna, titulo in enumerate(cabecalhos, start=1):
     celula = aba.cell(row=1, column=coluna)
 
@@ -37,7 +36,9 @@ for coluna, titulo in enumerate(cabecalhos, start=1):
 aba.column_dimensions["A"].width = 35
 aba.column_dimensions["B"].width = 15
 aba.column_dimensions["C"].width = 15
-aba.column_dimensions["D"].width = 15
+aba.column_dimensions["D"].width = 20
+aba.column_dimensions["E"].width = 15
+
 
 produtos = [
     ["Mouse Gamer", 120, 15],
@@ -66,35 +67,56 @@ borda = Border(
 linha = 2
 
 for produto in produtos:
+
     nome = produto[0]
     preco = produto[1]
     quantidade = produto[2]
 
     total = preco * quantidade
 
+    if quantidade < 5:
+        status = "CRITICO"
+
+    elif quantidade < 10:
+        status = "ATENCAO"
+
+    else:
+        status = "OK"
+
     aba[f"A{linha}"] = nome
     aba[f"B{linha}"] = preco
     aba[f"C{linha}"] = quantidade
-    aba[f"D{linha}"] = total
+    aba[f"D{linha}"] = status
+    aba[f"E{linha}"] = total
 
-    if total >= 3000:
-        aba[f"D{linha}"].fill = PatternFill(
-        start_color="F4CCCC",
-        end_color="F4CCCC",
-        fill_type="solid"
-    )
+    if status == "CRITICO":
 
-    elif total >= 1000:
         aba[f"D{linha}"].fill = PatternFill(
-        start_color="FFF2CC",
-        end_color="FFF2CC",
-        fill_type="solid"
-    )
+            start_color="F4CCCC",
+            end_color="F4CCCC",
+            fill_type="solid"
+        )
+
+    elif status == "ATENCAO":
+
+        aba[f"D{linha}"].fill = PatternFill(
+            start_color="FFF2CC",
+            end_color="FFF2CC",
+            fill_type="solid"
+        )
+
+    else:
+
+        aba[f"D{linha}"].fill = PatternFill(
+            start_color="D9EAD3",
+            end_color="D9EAD3",
+            fill_type="solid"
+        )
 
     aba[f"B{linha}"].number_format = 'R$ #,##0.00'
-    aba[f"D{linha}"].number_format = 'R$ #,##0.00'
+    aba[f"E{linha}"].number_format = 'R$ #,##0.00'
 
-    for coluna in ["A", "B", "C", "D"]:
+    for coluna in ["A", "B", "C", "D", "E"]:
         aba[f"{coluna}{linha}"].alignment = Alignment(horizontal="center")
         aba[f"{coluna}{linha}"].border = borda
 
@@ -112,9 +134,9 @@ aba[f"D{linha}"].font = Font(
     color="FFFFFF"
 )
 
-aba[f"D{linha}"] = f"=SUM(D2:D{linha-1})"
+aba[f"D{linha}"] = f"=SUM(E2:D{linha-1})"
 
-aba[f"D{linha}"].number_format = 'R$ #,##0.00'
+aba[f"E{linha}"].number_format = 'R$ #,##0.00'
 
 aba[f"C{linha}"].fill = PatternFill(
     start_color="D9EAD3",
@@ -136,7 +158,7 @@ aba[f"D{linha}"].border = borda
 
 aba.freeze_panes = "A2"
 
-aba.auto_filter.ref = f"A1:D{linha-1}"
+aba.auto_filter.ref = f"A1:E{linha-1}"
 
 aba.sheet_view.showGridLines = False
 
@@ -150,7 +172,7 @@ grafico.x_axis.title = "Produtos"
 
 dados = Reference(
     aba,
-    min_col=4,
+    min_col=5,
     min_row=2,
     max_row=linha-1
 )
