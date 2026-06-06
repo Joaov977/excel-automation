@@ -263,6 +263,19 @@ quantidade_total = sum(
 resumo["A6"] = "Quantidade Vendida"
 resumo["B6"] = quantidade_total
 
+resumo["A8"] = "TOP 3 PRODUTOS"
+resumo["A8"].font = Font(bold=True)
+
+top3 = sorted(
+    produtos,
+    key=lambda produto: produto[1] * produto[2],
+    reverse=True
+)[:3]
+
+for i, produto in enumerate(top3, start=9):
+
+    resumo[f"A{i}"] = f"{i-8}. {produto[0]}"
+
 for celula in ["A3", "A4", "A5", "A6"]:
     resumo[celula].font = Font(bold=True)
 
