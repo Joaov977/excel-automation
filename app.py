@@ -233,7 +233,18 @@ with open("vendas.csv", "w", newline="", encoding="utf-8") as arquivo:
 resumo = planilha.create_sheet("Resumo")
 
 resumo["A1"] = "RESUMO EXECUTIVO"
-resumo["A1"].font = Font(bold=True, size=16)
+
+resumo["A1"].font = Font(
+    bold=True,
+    size=16,
+    color="FFFFFF"
+)
+
+resumo["A1"].fill = PatternFill(
+    start_color="1F4E78",
+    end_color="1F4E78",
+    fill_type="solid"
+)
 
 resumo["A3"] = "Quantidade de Produtos"
 resumo["B3"] = len(produtos)
