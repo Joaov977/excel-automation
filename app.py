@@ -107,7 +107,7 @@ for produto in produtos:
 
     else:
 
-        aba[f"D{linha}"].fill = PatternFill(
+        aba[f"E{linha}"].fill = PatternFill(
             start_color="D9EAD3",
             end_color="D9EAD3",
             fill_type="solid"
@@ -124,7 +124,9 @@ for produto in produtos:
 
 aba[f"C{linha}"] = "Total Geral"
 
-aba[f"C{linha}"].font = Font(
+aba[f"E{linha}"] = f"=SUM(E2:E{linha-1})"
+
+aba[f"E{linha}"].font = Font(
     bold=True,
     color="FFFFFF"
 )
@@ -134,27 +136,27 @@ aba[f"D{linha}"].font = Font(
     color="FFFFFF"
 )
 
-aba[f"D{linha}"] = f"=SUM(E2:D{linha-1})"
+aba[f"E{linha}"] = f"=SUM(E2:E{linha-1})"
 
 aba[f"E{linha}"].number_format = 'R$ #,##0.00'
 
-aba[f"C{linha}"].fill = PatternFill(
+aba[f"E{linha}"].fill = PatternFill(
     start_color="D9EAD3",
     end_color="D9EAD3",
     fill_type="solid"
 )
 
-aba[f"D{linha}"].fill = PatternFill(
+aba[f"E{linha}"].fill = PatternFill(
     start_color="D9EAD3",
     end_color="D9EAD3",
     fill_type="solid"
 )
 
 aba[f"C{linha}"].alignment = Alignment(horizontal="center")
-aba[f"D{linha}"].alignment = Alignment(horizontal="center")
+aba[f"E{linha}"].alignment = Alignment(horizontal="center")
 
 aba[f"C{linha}"].border = borda
-aba[f"D{linha}"].border = borda
+aba[f"E{linha}"].border = borda
 
 aba.freeze_panes = "A2"
 
@@ -311,6 +313,39 @@ with open("relatorio.txt", "w", encoding="utf-8") as arquivo:
         )
 
     arquivo.write(f"\nFaturamento Total: R${faturamento_total}")
+
+ranking = planilha.create_sheet("Ranking")
+
+ranking["A1"] = "Produto"
+ranking["B1"] = "Faturamento"
+
+ranking["A1"].font = Font(bold=True)
+ranking["B1"].font = Font(bold=True)
+
+produtos_ordenados = sorted(
+    produtos,
+    key=lambda produto: produto[1] * produto[2],
+    reverse=True
+)
+
+linha_ranking = 2
+
+for produto in produtos_ordenados:
+
+    faturamento = produto[1] * produto[2]
+
+    ranking[f"A{linha_ranking}"] = produto[0]
+    ranking[f"B{linha_ranking}"] = faturamento
+
+    ranking[f"B{linha_ranking}"].number_format = 'R$ #,##0.00'
+
+    linha_ranking += 1
+
+ranking["C2"] = "🥇"
+ranking["C3"] = "🥈"
+ranking["C4"] = "🥉"
+
+
 planilha.save("vendas.xlsx")
 
 print("Planilha criada com sucesso!")
