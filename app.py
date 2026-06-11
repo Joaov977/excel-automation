@@ -289,6 +289,11 @@ for i, produto in enumerate(top3, start=9):
 
     resumo[f"A{i}"] = f"{i-8}. {produto[0]}"
 
+resumo["A13"] = "Gerado em:"
+resumo["B13"] = datetime.now().strftime('%d/%m/%Y %H:%M')
+
+resumo["A13"].font = Font(bold=True)    
+
 for celula in ["A3", "A4", "A5", "A6"]:
     resumo[celula].font = Font(bold=True)
 
