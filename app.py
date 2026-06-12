@@ -276,6 +276,17 @@ quantidade_total = sum(
 resumo["A6"] = "Quantidade Vendida"
 resumo["B6"] = quantidade_total
 
+estoque_critico = sum(
+    1
+    for produto in produtos
+    if produto[2] < 5
+)
+
+resumo["A7"] = "Produtos Críticos"
+resumo["B7"] = estoque_critico
+
+resumo["A7"].font = Font(bold=True)
+
 resumo["A8"] = "TOP 3 PRODUTOS"
 resumo["A8"].font = Font(bold=True)
 
