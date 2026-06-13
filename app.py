@@ -361,6 +361,10 @@ ranking["C2"] = "🥇"
 ranking["C3"] = "🥈"
 ranking["C4"] = "🥉"
 
+ranking.column_dimensions["A"].width = 35
+ranking.column_dimensions["B"].width = 15
+ranking.column_dimensions["C"].width = 5
+
 
 planilha.save("vendas.xlsx")
 
