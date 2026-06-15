@@ -338,6 +338,9 @@ ranking["B1"] = "Faturamento"
 ranking["A1"].font = Font(bold=True)
 ranking["B1"].font = Font(bold=True)
 
+ranking["A1"].alignment = Alignment(horizontal="center")
+ranking["B1"].alignment = Alignment(horizontal="center")
+
 produtos_ordenados = sorted(
     produtos,
     key=lambda produto: produto[1] * produto[2],
