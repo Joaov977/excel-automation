@@ -364,6 +364,13 @@ ranking["C2"] = "🥇"
 ranking["C3"] = "🥈"
 ranking["C4"] = "🥉"
 
+for coluna in ["A", "B", "C"]:
+    ranking[f"{coluna}2"].fill = PatternFill(
+        start_color="FFF2CC",
+        end_color="FFF2CC",
+        fill_type="solid"
+    )
+
 ranking.column_dimensions["A"].width = 35
 ranking.column_dimensions["B"].width = 15
 ranking.column_dimensions["C"].width = 5
