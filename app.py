@@ -375,6 +375,64 @@ ranking.column_dimensions["A"].width = 35
 ranking.column_dimensions["B"].width = 15
 ranking.column_dimensions["C"].width = 5
 
+indicadores = planilha.create_sheet("Indicadores")
+
+ranking["C2"] = "🥇"
+ranking["C3"] = "🥈"
+ranking["C4"] = "🥉"
+
+indicadores = planilha.create_sheet("Indicadores")
+
+indicadores["A1"] = "INDICADORES"
+indicadores["A1"].font = Font(
+    bold=True,
+    size=16,
+    color="FFFFFF"
+)
+
+indicadores["A1"].fill = PatternFill(
+    start_color="1F4E78",
+    end_color="1F4E78",
+    fill_type="solid"
+)
+
+ticket_medio = faturamento_total / quantidade_total
+
+indicadores["A3"] = "Ticket Médio"
+indicadores["B3"] = ticket_medio
+indicadores["B3"].number_format = 'R$ #,##0.00'
+
+produto_caro = max(
+    produtos,
+    key=lambda produto: produto[1]
+)
+
+indicadores["A4"] = "Produto Mais Caro"
+indicadores["B4"] = produto_caro[0]
+
+produto_barato = min(
+    produtos,
+    key=lambda produto: produto[1]
+)
+
+indicadores["A5"] = "Produto Mais Barato"
+indicadores["B5"] = produto_barato[0]
+
+produto_estoque = max(
+    produtos,
+    key=lambda produto: produto[2]
+)
+
+indicadores["A6"] = "Maior Estoque"
+indicadores["B6"] = produto_estoque[0]
+
+for celula in ["A3", "A4", "A5", "A6"]:
+    indicadores[celula].font = Font(bold=True)
+
+planilha.save("vendas.xlsx")
+
+print("Planilha criada com sucesso!")
+
 
 planilha.save("vendas.xlsx")
 
