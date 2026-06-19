@@ -334,6 +334,7 @@ ranking = planilha.create_sheet("Ranking")
 
 ranking["A1"] = "Produto"
 ranking["B1"] = "Faturamento"
+ranking["C1"] = "Classificação"
 
 ranking["A1"].font = Font(bold=True)
 ranking["B1"].font = Font(bold=True)
@@ -355,6 +356,41 @@ for produto in produtos_ordenados:
 
     ranking[f"A{linha_ranking}"] = produto[0]
     ranking[f"B{linha_ranking}"] = faturamento
+
+    if faturamento >= 8000:
+        classificacao = "Excelente"
+
+    elif faturamento >= 4000:
+        classificacao = "Bom"
+
+    else:
+        classificacao = "Regular"
+
+    ranking[f"C{linha_ranking}"] = classificacao
+
+    if classificacao == "Excelente":
+
+        ranking[f"C{linha_ranking}"].fill = PatternFill(
+            start_color="D9EAD3",
+            end_color="D9EAD3",
+            fill_type="solid"
+        )
+
+    elif classificacao == "Bom":
+
+        ranking[f"C{linha_ranking}"].fill = PatternFill(
+            start_color="FFF2CC",
+            end_color="FFF2CC",
+            fill_type="solid"
+        )
+
+    else:
+
+        ranking[f"C{linha_ranking}"].fill = PatternFill(
+            start_color="F4CCCC",
+            end_color="F4CCCC",
+            fill_type="solid"
+        )
 
     ranking[f"B{linha_ranking}"].number_format = 'R$ #,##0.00'
 
