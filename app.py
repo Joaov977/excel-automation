@@ -462,8 +462,28 @@ produto_estoque = max(
 indicadores["A6"] = "Maior Estoque"
 indicadores["B6"] = produto_estoque[0]
 
+produto_rentavel = max(
+    produtos,
+    key=lambda produto: produto[1] * produto[2]
+)
+
+indicadores["A7"] = "Produto Mais Rentável"
+indicadores["B7"] = produto_rentavel[0]
+
+indicadores["A7"].font = Font(bold=True)
+
 for celula in ["A3", "A4", "A5", "A6"]:
     indicadores[celula].font = Font(bold=True)
+
+produto_menor_faturamento = min(
+    produtos,
+    key=lambda produto: produto[1] * produto[2]
+)
+
+indicadores["A8"] = "Menor Faturamento"
+indicadores["B8"] = produto_menor_faturamento[0]
+
+indicadores["A8"].font = Font(bold=True)    
 
 planilha.save("vendas.xlsx")
 
