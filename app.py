@@ -483,12 +483,72 @@ produto_menor_faturamento = min(
 indicadores["A8"] = "Menor Faturamento"
 indicadores["B8"] = produto_menor_faturamento[0]
 
-indicadores["A8"].font = Font(bold=True)    
+indicadores["A8"].font = Font(bold=True)
 
-planilha.save("vendas.xlsx")
+estoque = planilha.create_sheet("Estoque")
 
-print("Planilha criada com sucesso!")
+estoque["A1"] = "Produto"
+estoque["B1"] = "Quantidade"
+estoque["C1"] = "Status"
 
+for celula in ["A1", "B1", "C1"]:
+
+    estoque[celula].font = Font(
+        bold=True,
+        color="FFFFFF"
+    )
+
+    estoque[celula].fill = PatternFill(
+        start_color="1F4E78",
+        end_color="1F4E78",
+        fill_type="solid"
+    )
+
+linha_estoque = 2
+
+for produto in produtos:
+
+    nome = produto[0]
+    quantidade = produto[2]
+
+    if quantidade < 5:
+        status = "CRITICO"
+
+    elif quantidade < 10:
+        status = "ATENCAO"
+
+    else:
+        status = "OK"
+
+    estoque[f"A{linha_estoque}"] = nome
+    estoque[f"B{linha_estoque}"] = quantidade
+    estoque[f"C{linha_estoque}"] = status
+
+    if status == "CRITICO":
+
+        estoque[f"C{linha_estoque}"].fill = PatternFill(
+        start_color="F4CCCC",
+        end_color="F4CCCC",
+        fill_type="solid"
+    )
+
+    elif status == "ATENCAO":
+
+        estoque[f"C{linha_estoque}"].fill = PatternFill(
+        start_color="FFF2CC",
+        end_color="FFF2CC",
+        fill_type="solid"
+    )
+
+    else:
+
+        estoque[f"C{linha_estoque}"].fill = PatternFill(
+        start_color="D9EAD3",
+        end_color="D9EAD3",
+        fill_type="solid"
+    )
+
+linha_estoque += 1
 
 planilha.save("vendas.xlsx")
 
