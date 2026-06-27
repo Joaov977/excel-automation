@@ -3,7 +3,16 @@ import tkinter as tk
 janela = tk.Tk()
 
 janela.title("Sistema de Relatório de Vendas")
-janela.geometry("500x350")
+largura = 500
+altura = 350
+
+largura_tela = janela.winfo_screenwidth()
+altura_tela = janela.winfo_screenheight()
+
+x = (largura_tela // 2) - (largura // 2)
+y = (altura_tela // 2) - (altura // 2)
+
+janela.geometry(f"{largura}x{altura}+{x}+{y}")
 
 titulo = tk.Label(
     janela,
