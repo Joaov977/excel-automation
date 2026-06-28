@@ -43,4 +43,13 @@ botao_sair = tk.Button(
 
 botao_sair.pack(pady=10)
 
+rodape = tk.Label(
+    janela,
+    text="Versão 1.0 | Desenvolvido por João Vitor",
+    font=("Arial", 9),
+    fg="gray"
+)
+
+rodape.pack(side="bottom", pady=10)
+
 janela.mainloop()
