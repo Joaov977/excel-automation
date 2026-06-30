@@ -22,6 +22,15 @@ titulo = tk.Label(
 
 titulo.pack(pady=30)
 
+status = tk.Label(
+    janela,
+    text="Sistema pronto.",
+    font=("Arial", 10),
+    fg="green"
+)
+
+status.pack(pady=5)
+
 botao_relatorio = tk.Button(
     janela,
     text="📊 Gerar Relatório",
