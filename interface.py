@@ -3,6 +3,7 @@ import tkinter as tk
 janela = tk.Tk()
 
 janela.title("Sistema de Relatório de Vendas")
+janela.resizable(False, False)
 largura = 500
 altura = 350
 
